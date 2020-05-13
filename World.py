@@ -95,12 +95,18 @@ class World:
             pass
 
 
-    def create_agents(self, population_name, agent_class, number_of_agents, overwrite = True):
+    def create_agents(
+        self,
+        population_name,
+        agent_class,
+        number_of_agents,
+        overwrite = True,
+        ):
+
         if overwrite:
             self.agents.update({population_name: []})
 
         for i in range(number_of_agents):
-            name = population_name + "_" + str(i)
-            agent = agent_class(name)
+            agent = agent_class()
             agent.population = self.agents[population_name]
             self.agents[population_name].append(agent)
