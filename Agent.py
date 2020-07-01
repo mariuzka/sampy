@@ -24,10 +24,17 @@ class Agent:
         self.residence_cell.dict_of_residents.update({self.name: self}) # Bei Zelle anmelden
         self.x_grid_pos = self.residence_cell.x_grid_pos    # Koordinaten des neuen Aufenthaltsortes übernehmen
         self.y_grid_pos = self.residence_cell.y_grid_pos
+        
+        if not self.residence_cell.main_resident:
+            self.residence_cell.main_resident = self
+            
 
 
     def move_out(self):
         """ Ordnungsgemäßes Verlassen einer Zelle"""
+        if self.residence_cell.main_resident == self:
+            self.residence_cell.main_resident = None
+            
         del(self.residence_cell.dict_of_residents[self.name]) # sich selbst aus Dict löschen
         self.residence_cell = False             # Zelle als Aufenthaltsort entfernen
         self.x_grid_pos = None                  # X-Position entfernen

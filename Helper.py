@@ -35,11 +35,21 @@ def squared_distance_on_torus(dim_pos1, dim_pos2, dim_len):
                 squared_distance_via_edge(dim_pos1, dim_pos2, dim_len),  # "Indirekte" Distanz über Rand
                 ])
 
-def euclidian_distance(x_pos1, y_pos1, x_pos2, y_pos2, x_dim_len, y_dim_len, torus = True):
+def euclidian_distance(
+        x_pos1, 
+        y_pos1, 
+        x_pos2, 
+        y_pos2, 
+        x_dim_len = None,
+        y_dim_len = None, 
+        torus = True):
+    
     if torus:
+        assert x_dim_len != None and y_dim_len != None
         return math.sqrt(squared_distance_on_torus(x_pos1, x_pos2, x_dim_len) + squared_distance_on_torus(y_pos1, y_pos2, y_dim_len))
     else:
         return math.sqrt((x_pos1 - x_pos2) ** 2 + (y_pos1 - y_pos2) ** 2)
+
 
 
 def subtract_via_edge(dim_pos1, dim_pos2, dim_len):

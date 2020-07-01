@@ -22,9 +22,11 @@ class Cell:
         self.y_grid_pos = y_grid_pos  # Unveränderliche Position auf der Y-Achse des Grids
 
         self.walkable = True    # gibt an, ob die Zelle begehbar ist für Agenten
-        self.resident = False   # agent, who is currently on that cell
+        self.main_resident = None
+        
+        # noch latest_resident und list_of_residents einbauen
 
-        self.dict_of_residents = {}  # agents, who currently are on that cell
+        self.dict_of_residents = {}  
 
         self.neighbor_cells = []  # benachbarte Cells, je nach Definition von Nachbar
 

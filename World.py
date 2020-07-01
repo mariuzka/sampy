@@ -18,8 +18,8 @@ class World:
         self.len_x_grid_dim = len_x_grid_dim
         self.len_y_grid_dim = len_y_grid_dim
 
-        self.half_x_grid_dim = int(self.len_x_grid_dim / 2)
-        self.half_y_grid_dim = int(self.len_y_grid_dim / 2)
+        self.half_x_grid_dim = self.len_x_grid_dim // 2
+        self.half_y_grid_dim = self.len_y_grid_dim // 2
 
         self.grid_as_matrix = [[]]
         self.grid_as_flat_list = []
@@ -71,7 +71,11 @@ class World:
 
     # returns a list of empty cells in own grid
     def get_empty_cells(self):
-        empty_cells = [cell for cell in self.grid_as_flat_list if len(cell.residents) == 0]
+        
+        empty_cells = [cell 
+                       for cell in self.grid_as_flat_list 
+                       if len(cell.dict_of_residents) == 0]
+        
         return empty_cells
 
     def place_agents_on_grid(
@@ -80,6 +84,8 @@ class World:
             rule = "random_on_empty_cells",
     ):
         # Das Grid muss groß genug für die Population sein
+        print(len(self.grid_as_flat_list))
+        print(len(population))
         assert len(self.grid_as_flat_list) >= len(population)
 
         if rule == "random_on_empty_cells":
@@ -88,7 +94,7 @@ class World:
 
             for agent in population:
                 new_residence_cell = random.choice(self.get_empty_cells())
-                agent.move_out()
+                #agent.move_out()
                 agent.move_in(new_residence_cell)
 
         else:
